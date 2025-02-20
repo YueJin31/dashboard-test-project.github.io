@@ -23,7 +23,7 @@
 		"scss",
 		"html"
 	],
-	"homepage": "https://github.com/YueJin31/dashboard-test-project.github.io",
+	"homepage": "https://YueJin31.github.io/dashboard-test-project",
 	"devDependencies": {
 		"@archoleat/stylelint-config-extended-scss": "^1.6.9",
 		"@types/node": "^22.10.2",
