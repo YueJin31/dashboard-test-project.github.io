@@ -136,9 +136,18 @@
 
 		&.item--speedometr,
 		&.item--emoji {
-			@media only screen and (min-width: 576px) and (max-width: 1280px) {
+			@media only screen and (min-width: 576px) and (max-width: 768px) {
 				width: calc(50% - #{rem(16)});
 				min-height: rem(208);
+			}
+		}
+
+		&.item--chart {
+			aspect-ratio: 640 / 292;
+			min-height: rem(292);
+
+			@include media-mn(1024) {
+				width: calc(50% - #{rem(16)});
 			}
 		}
 
@@ -147,19 +156,6 @@
 
 			.dashboard__item-header {
 				margin-bottom: rem(25);
-			}
-		}
-
-		&:nth-last-child(-n + 2) {
-			aspect-ratio: 640 / 292;
-			min-height: rem(292);
-
-			@include media-mn(768) {
-				width: 100%;
-			}
-
-			@include media-mn(1024) {
-				width: calc(50% - #{rem(16)});
 			}
 		}
 
