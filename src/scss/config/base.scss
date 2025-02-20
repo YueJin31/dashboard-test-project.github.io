@@ -1,0 +1,40 @@
+@use "functions" as *;
+@use "mixins" as *;
+@use "vars" as global;
+
+[class*="__container"] {
+	margin-inline: auto;
+	max-inline-size: rem(global.$max-width-container);
+	padding-inline: rem(global.$main-offset);
+}
+
+.wrapper {
+	display: flex;
+	min-block-size: 100%;
+	overflow: hidden;
+	flex-direction: column;
+}
+
+.page {
+	position: relative;
+	flex: 1 1 auto;
+	padding: 64px 39px;
+
+	@include media-mx(768) {
+		padding: 15px;
+	}
+
+	[data-observ] {
+		pointer-events: none;
+		position: absolute;
+		inset-block-start: 0;
+		inset-inline-start: 0;
+		block-size: rem(2);
+		inline-size: 100%;
+		background: transparent;
+	}
+
+	&_start {
+		padding-block-start: rem(global.$header-height);
+	}
+}

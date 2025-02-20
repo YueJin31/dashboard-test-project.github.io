@@ -1,0 +1,21 @@
+$breakpoints: (
+	small: 0,
+	medium: 768,
+	large: 1024,
+	xlarge: 1280,
+	xxlarge: 1536,
+);
+
+$breakpoint-classes: (small medium large);
+
+$main-offset: 15;
+
+$max-width: 1920;
+
+$min-width: 320;
+
+$container-width: 1312;
+
+$max-width-container: $container-width + ($main-offset * 2);
+$header-height: 100;
+$footer-height: 100;

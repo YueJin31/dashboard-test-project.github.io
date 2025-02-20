@@ -1,0 +1,10 @@
+@use "config/root";
+
+@use "config/reset";
+
+@use "config/fonts";
+
+@use "config/base";
+
+// templates
+@use "templates/dashboard";
