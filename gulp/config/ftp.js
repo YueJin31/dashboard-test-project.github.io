@@ -1,9 +1,6 @@
 export const configFTP = {
-	// Адрес FTP сервера для подключения
-	host: '',
-	// Имя пользователя для подключения
-	user: '',
-	password: '',
-	// Кол-во одновременных потоков
+	host: "",
+	user: "",
+	password: "",
 	parallel: 20,
 };

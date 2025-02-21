@@ -1,7 +1,7 @@
-import { resolve, basename } from 'node:path';
+import { resolve, basename } from "node:path";
 
-const buildFolder = './dist';
-const srcFolder = './src';
+const buildFolder = "./dist";
+const srcFolder = "./src";
 
 export const filePaths = {
 	build: {
@@ -31,6 +31,6 @@ export const filePaths = {
 	buildFolder,
 	srcFolder,
 	projectDirName: basename(resolve()),
-	// Путь к нужной папке на удаленном сервере. Gulp добавит имя папки проекта автоматически
-	ftp: '',
+
+	ftp: "",
 };

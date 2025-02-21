@@ -1,10 +1,10 @@
-import gulp from 'gulp';
-import { existsSync, promises } from 'node:fs';
-import fonter from 'gulp-fonter-fix';
-import ttf2woff2 from 'gulp-ttf2woff2';
+import gulp from "gulp";
+import { existsSync, promises } from "node:fs";
+import fonter from "gulp-fonter-fix";
+import ttf2woff2 from "gulp-ttf2woff2";
 
-import { filePaths } from '../config/paths.js';
-import { logger } from '../config/logger.js';
+import { filePaths } from "../config/paths.js";
+import { logger } from "../config/logger.js";
 
 const { fontFacesFile } = filePaths.src;
 const italicRegex = /italic/i;
@@ -39,36 +39,28 @@ const fontFaceTemplate = (name, file, weight, style) => `@font-face {
 
 export const otfToTtf = (done) => {
 	if (existsSync(fontFacesFile)) return done();
-	/** Поиск шрифтов .otf */
-	return gulp.src(`${filePaths.src.fonts}/*.otf`, {})
-		.pipe(logger.handleError('FONTS [otfToTtf]'))
+	return gulp
+		.src(`${filePaths.src.fonts}/*.otf`, {})
+		.pipe(logger.handleError("FONTS [otfToTtf]"))
 
-		/** Конвертация в .ttf */
-		.pipe(fonter({ formats: ['ttf'] }))
+		.pipe(fonter({ formats: ["ttf"] }))
 
-		/** Выгрузка в исходную папку */
 		.pipe(gulp.dest(filePaths.src.fonts));
 };
 
 export const ttfToWoff = () => {
 	if (existsSync(fontFacesFile)) {
-		return gulp.src(`${filePaths.src.fonts}/*.woff2`, {})
-			.pipe(logger.handleError('FONTS [ttfToWoff]'))
+		return gulp
+			.src(`${filePaths.src.fonts}/*.woff2`, {})
+			.pipe(logger.handleError("FONTS [ttfToWoff]"))
 			.pipe(gulp.dest(filePaths.build.fonts));
 	}
 
-	/** Поиск шрифтов [.ttf] и конвертация в [.woff2] */
-	return gulp.src(`${filePaths.src.fonts}/*.ttf`, {})
-		.pipe(logger.handleError('FONTS [ttfToWoff]'))
+	return gulp
+		.src(`${filePaths.src.fonts}/*.ttf`, {})
+		.pipe(logger.handleError("FONTS [ttfToWoff]"))
 		.pipe(ttf2woff2())
 		.pipe(gulp.dest(filePaths.src.fonts))
-
-		/** Если нужно раскомментировать. Конвертация в [.woff] */
-		//.pipe(gulp.src(`${filePaths.src.fonts}/*.ttf`))
-		//.pipe(fonter({ formats: ['woff'] }))
-		//.pipe(gulp.dest(filePaths.build.fonts))
-
-		/** Поиск шрифтов [.woff, .woff2] и выгрузка в финальную папку */
 		.pipe(gulp.src(`${filePaths.src.fonts}/*.{woff,woff2}`))
 		.pipe(gulp.dest(filePaths.build.fonts));
 };
@@ -76,34 +68,33 @@ export const ttfToWoff = () => {
 export const fontStyle = async () => {
 	try {
 		if (existsSync(fontFacesFile)) {
-			logger.warning('Файл scss/config/fonts.scss уже существует.\nДля обновления файла его нужно удалить!');
+			logger.warning("Файл scss/config/fonts.scss уже существует.\nДля обновления файла его нужно удалить!");
 			return;
 		}
 
 		const fontFiles = await promises.readdir(filePaths.build.fonts);
 
 		if (!fontFiles) {
-			logger.error('Нет сконвертированных шрифтов');
+			logger.error("Нет сконвертированных шрифтов");
 			return;
 		}
 
-		await promises.writeFile(fontFacesFile, '');
+		await promises.writeFile(fontFacesFile, "");
 		let newFileOnly;
 
 		for (const file of fontFiles) {
-			const [fileName] = file.split('.');
+			const [fileName] = file.split(".");
 
 			if (newFileOnly !== fileName) {
-				const [name, weight = 'regular'] = fileName.split('-');
-				const weightString = fontWeights[weight.replace(cleanSeparator, '').toLowerCase()];
-				const fontStyle = italicRegex.test(fileName) ? 'italic' : 'normal';
+				const [name, weight = "regular"] = fileName.split("-");
+				const weightString = fontWeights[weight.replace(cleanSeparator, "").toLowerCase()];
+				const fontStyle = italicRegex.test(fileName) ? "italic" : "normal";
 
 				await promises.appendFile(fontFacesFile, fontFaceTemplate(name, fileName, weightString, fontStyle));
 				newFileOnly = fileName;
 			}
 		}
-	}
-	catch (err) {
-		logger.error('Ошибка при обработке шрифтов:\n', err);
+	} catch (err) {
+		logger.error("Ошибка при обработке шрифтов:\n", err);
 	}
 };

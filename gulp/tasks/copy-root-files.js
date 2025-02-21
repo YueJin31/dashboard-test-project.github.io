@@ -1,8 +1,8 @@
-import gulp from 'gulp';
+import gulp from "gulp";
 
-import { plugins } from '../config/plugins.js';
-import { filePaths } from '../config/paths.js';
-import { logger } from '../config/logger.js';
+import { plugins } from "../config/plugins.js";
+import { filePaths } from "../config/paths.js";
+import { logger } from "../config/logger.js";
 
 export const copyRootFiles = () => {
 	const config = {
@@ -10,10 +10,10 @@ export const copyRootFiles = () => {
 		allowEmpty: true,
 	};
 
-	/** Добавляем файлы, которые нужны в корне проекта */
-	const files = ['favicon.ico', '.htaccess'];
+	const files = ["favicon.ico", ".htaccess"];
 
-	return gulp.src(plugins.concat(filePaths.srcFolder, files), config)
-		.pipe(logger.handleError('COPY ROOT FILES'))
+	return gulp
+		.src(plugins.concat(filePaths.srcFolder, files), config)
+		.pipe(logger.handleError("COPY ROOT FILES"))
 		.pipe(gulp.dest(filePaths.buildFolder));
 };

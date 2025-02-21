@@ -1,11 +1,11 @@
-import { filePaths } from '../config/paths.js';
+import { filePaths } from "../config/paths.js";
 
 export const server = (instance) => {
 	instance.init({
 		server: {
 			baseDir: filePaths.buildFolder,
 		},
-		logLevel: 'info',
+		logLevel: "info",
 		cors: true,
 		notify: true,
 		open: false,

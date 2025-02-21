@@ -1,13 +1,14 @@
-import gulp from 'gulp';
-import webpack from 'webpack-stream';
+import gulp from "gulp";
+import webpack from "webpack-stream";
 
-import { webpackConfig } from '../../webpack.config.js';
-import { filePaths } from '../config/paths.js';
-import { logger } from '../config/logger.js';
+import { webpackConfig } from "../../webpack.config.js";
+import { filePaths } from "../config/paths.js";
+import { logger } from "../config/logger.js";
 
 export const javascript = async (isDev, serverInstance) => {
-	return gulp.src(filePaths.src.js)
-		.pipe(logger.handleError('JS'))
+	return gulp
+		.src(filePaths.src.js)
+		.pipe(logger.handleError("JS"))
 		.pipe(webpack({ config: await webpackConfig(isDev) }))
 		.pipe(gulp.dest(filePaths.build.js))
 		.pipe(serverInstance.stream());
