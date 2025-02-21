@@ -18,7 +18,7 @@ export const filePaths = {
 		scss: [`${srcFolder}/scss/main.scss`, `${srcFolder}/scss/pages/*.scss`],
 		html: `${srcFolder}/*.html`,
 		static: `${srcFolder}/static/**/*.*`,
-		fontFacesFile: `${srcFolder}/scss/config/fonts.scss`,
+		fontFacesFile: `${srcFolder}/scss/config/_fonts.scss`,
 		fonts: `${srcFolder}/fonts/`,
 	},
 	watch: {
